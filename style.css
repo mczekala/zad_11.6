@@ -1,0 +1,28 @@
+body {
+	background-color: #eaeaea;
+}
+.board {
+	text-align: center;
+	margin-top: 100px;
+}
+.column-container {
+	display: flex;
+	justify-content: space-around;
+	text-align: center;
+	margin-top: 100px;
+}
+.column {
+	text-align: left;
+	background-color: #B8CB8F;
+	padding: 50px;
+}
+li {
+	list-style: none;
+}
+button, p {
+	display: inline-block;
+}
+.header {
+	background-color: #a2b677;
+	padding: 20px 0;
+}
