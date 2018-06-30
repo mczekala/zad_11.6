@@ -1,7 +1,6 @@
 $(function() {
     function Column(name) {
 	    var self = this;
-
 	    this.id = randomString();
 	    this.name = name;
 	    this.$element = createColumn();
@@ -14,21 +13,21 @@ $(function() {
 		    return str;
 		}
 	    function createColumn() {
+	    	//struktura html kolumny
 	    	var $column = $('<div>').addClass('column');
 			var $columnTitle = $('<h2>').addClass('column-title').text(self.name);
 			var $columnCardList = $('<ul>').addClass('column-card-list');
 			var $columnDelete = $('<button>').addClass('btn-delete').text('x');
 			var $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
+			//listenery w column
 			$columnDelete.click(function() {
 	        	self.removeColumn();
 			});
 	    	$columnAddCard.click(function() {
 	        	self.addCard(new Card(prompt("Enter the name of the card")));
 			});
-			$column.append($columnTitle)
-	        .append($columnDelete)
-	        .append($columnAddCard)
-	        .append($columnCardList);
+			//dodanie struktury
+			$column.append($columnTitle).append($columnDelete).append($columnAddCard).append($columnCardList);
 			return $column;
 	    }
   	}
@@ -42,7 +41,6 @@ $(function() {
   	};
   	function Card(description) {
 		var self = this;
-
 	    this.id = randomString();
 	    this.description = description;
 	    this.$element = createCard();
@@ -55,14 +53,16 @@ $(function() {
 		    return str;
 		}
 	    function createCard() {
+	    	//struktura html karty
 		    var $card = $('<li>').addClass('card');
 		    var $cardDescription = $('<p>').addClass('card-description').text(self.description);
 		    var $cardDelete = $('<button>').addClass('btn-delete').text('x');
+		    //listener w karty
 		    $cardDelete.click(function(){
 	        	self.removeCard();
 			});
-			$card.append($cardDelete)
-			.append($cardDescription);
+			//dodanie struktury
+			$card.append($cardDelete).append($cardDescription);
 			return $card;
 		}
   	}
@@ -84,30 +84,22 @@ $(function() {
 	     	connectWith: '.column-card-list',
 	    	placeholder: 'card-placeholder'
 	   	}).disableSelection();
-	   	  	$('.create-column')
-  		.click(function(){
+	   	$('.create-column').click(function(){
 			var name = prompt('Enter a column name');
 			var column = new Column(name);
     		board.addColumn(column);
   		});
 	}
 
-
-	  // CREATING COLUMNS
 	var todoColumn = new Column('To do');
 	var doingColumn = new Column('Doing');
 	var doneColumn = new Column('Done');
-
-	// ADDING COLUMNS TO THE BOARD
-	board.addColumn(todoColumn);
-	board.addColumn(doingColumn);
-	board.addColumn(doneColumn);
-
-	// CREATING CARDS
 	var card1 = new Card('New task');
 	var card2 = new Card('Create kanban boards');
 
-	// ADDING CARDS TO COLUMNS
+	board.addColumn(todoColumn);
+	board.addColumn(doingColumn);
+	board.addColumn(doneColumn);
 	todoColumn.addCard(card1);
 	doingColumn.addCard(card2);
 })
