@@ -10,8 +10,9 @@ body {
 	justify-content: space-around;
 	text-align: center;
 	margin-top: 100px;
+
 }
-.column {
+.column, .archive{
 	text-align: left;
 	background-color: #B8CB8F;
 	padding: 50px;
