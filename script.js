@@ -28,7 +28,7 @@ $(function() {
 	        	self.removeColumn();
 			});
 	    	$columnAddCard.click(function() {
-	        	self.addCard(new Card(self.id,prompt("Enter the name of the card")));
+	        	self.addCard(new Card($(self),prompt("Enter the name of the card")));
 			});
 			//dodanie struktury
 			$column.append($columnTitle).append($columnDelete).append($columnAddCard).append($columnCardList);
@@ -74,11 +74,11 @@ $(function() {
 		archiveCard: function() {
 			var self=this;
 			this.$element.children('button').remove();
-			this.$restore = $('<button>').addClass('btn-restore').text('restore');
-			this.$element.append(this.$restore);
+			this.$restoreButton = $('<button>').addClass('btn-restore').text('restore');
+			this.$element.append(this.$restoreButton);
 			$('.archive').append(this.$element);
 
-			this.$restore.click(function() {
+			this.$restoreButton.click(function() {
 				console.log(self.$element);
 				console.log(self.$parent);
 				var obj = self.$parent;
