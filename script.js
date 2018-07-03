@@ -42,7 +42,7 @@ $(function() {
 	  	removeColumn: function() {
 	 	 	this.$element.remove();
 	  	}
-  	};
+  	}
   	function Card($parent,description) {
 		var self = this;
 		this.$parent = $parent;
@@ -55,6 +55,7 @@ $(function() {
 		    var $cardDescription = $('<p>').addClass('card-description').text(self.description);
 		    var $cardDelete = $('<button>').addClass('btn-delete').text('x');
 		    var $cardArchive = $('<button>').addClass('btn-archive').text('archive');
+		    var $cardRestore = $('<button>').addClass('btn-restore').text('restore');
 		    //listener w karty
 		    $cardDelete.click(function(){
 	        	self.removeCard();
@@ -62,8 +63,12 @@ $(function() {
 			$cardArchive.click(function(){
 	        	self.archiveCard();
 			});
+			$cardRestore.click(function() {
+				self.restoreCard();
+			});
 			//dodanie struktury
-			$card.append($cardDelete).append($cardDescription).append($cardArchive);
+			$card.append($cardDelete).append($cardDescription).append($cardArchive).append($cardRestore);
+			$('.btn-restore').css("display","none");
 			return $card;
 		}
   	}
@@ -72,18 +77,16 @@ $(function() {
 			this.$element.remove();
 		},
 		archiveCard: function() {
-			var self=this;
-			this.$element.children('button').remove();
-			this.$restoreButton = $('<button>').addClass('btn-restore').text('restore');
-			this.$element.append(this.$restoreButton);
 			$('.archive').append(this.$element);
-
-			this.$restoreButton.click(function() {
-				console.log(self.$element);
-				console.log(self.$parent);
-				var obj = self.$parent;
-				obj.append(self.$element);
-			})
+			$('.btn-delete').css("display","none");
+			$('.btn-archive').css("display","none");
+			$('.btn-restore').css("display","block");
+		},
+		restoreCard: function() {
+			this.$parent.append(this.$element);
+			$('.btn-delete').css("display","block");
+			$('.btn-archive').css("display","block");
+			$('.btn-restore').css("display","none");
 		}
 	}
   	var board = {
@@ -113,6 +116,6 @@ $(function() {
 	board.addColumn(todoColumn);
 	board.addColumn(doingColumn);
 	board.addColumn(doneColumn);
-	todoColumn.addCard(new Card($(todoColumn),'New task'));
-	doingColumn.addCard(new Card($(doingColumn),'Create kanban boards'));
+	todoColumn.addCard(new Card($(todoColumn.$element),'New task'));
+	doingColumn.addCard(new Card($(doingColumn.$element),'Create kanban boards'));
 })
