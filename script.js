@@ -51,7 +51,7 @@ $(function() {
 	    this.$element = createCard();
 	    function createCard() {
 	    	//struktura html karty
-		    var $card = $('<li>').addClass('card');
+		    var $card = $('<li>').addClass('card').attr('id',self.id);
 		    var $cardDescription = $('<p>').addClass('card-description').text(self.description);
 		    var $cardDelete = $('<button>').addClass('btn-delete').text('x');
 		    var $cardArchive = $('<button>').addClass('btn-archive').text('archive');
@@ -78,15 +78,16 @@ $(function() {
 		},
 		archiveCard: function() {
 			$('.archive').append(this.$element);
-			$('.btn-delete').css("display","none");
-			$('.btn-archive').css("display","none");
-			$('.btn-restore').css("display","block");
+			console.log();
+			$('#'+this.id+' .btn-delete').css("display","none");
+			$('#'+this.id+' .btn-archive').css("display","none");
+			$('#'+this.id+' .btn-restore').css("display","block");
 		},
 		restoreCard: function() {
 			this.$parent.append(this.$element);
-			$('.btn-delete').css("display","block");
-			$('.btn-archive').css("display","block");
-			$('.btn-restore').css("display","none");
+			$('#'+this.id+' .btn-delete').css("display","block");
+			$('#'+this.id+' .btn-archive').css("display","block");
+			$('#'+this.id+' .btn-restore').css("display","none");
 		}
 	}
   	var board = {
